@@ -21,7 +21,7 @@ export const HeroSection = () => {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground max-2-2xl mx-auto opacity-0 animate-fade-in-delay-3">
-            I’m a DevOps Engineer with over 5 years of experience in building, automating, and optimizing infrastructure and workflows. I specialize in cloud architecture, CI/CD pipelines, and container orchestration to deliver scalable and reliable systems.
+            Building secure, scalable, and automated systems that transform ideas into reliable digital solutions. Driven by innovation, powered by DevOps, and focused on delivering technology that performs without compromise.
           </p>
 
           <div className="pt-4 opacity-0 animate-fade-in-delay-4">
