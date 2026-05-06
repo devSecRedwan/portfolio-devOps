@@ -7,7 +7,7 @@ import { SkillsSection } from "@/components/Skills"
 
 import { ContactSection } from "@/components/ContactSection"
 import { Footer } from "@/components/Footer"
-import { ProjectsSection } from "@/components/ProjectSection"
+// import { ProjectsSection } from "@/components/ProjectSection"
 
 export const Home = () => {
   return <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -26,7 +26,7 @@ export const Home = () => {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
-      <ProjectsSection />
+      {/* <ProjectsSection /> */}
       <ContactSection />
     </main>
 
