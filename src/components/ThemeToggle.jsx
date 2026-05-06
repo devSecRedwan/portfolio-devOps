@@ -4,33 +4,30 @@ import { cn } from "@/lib/utils";
 
 export const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-  // ✅ Lazy initializer runs once on mount — no effect needed
-  const storedTheme = localStorage.getItem("theme");
-  if (storedTheme !== "dark") {
-    localStorage.setItem("theme", "light");
-  }
-  return storedTheme === "dark";
-});
-
-useEffect(() => {
-  // ✅ Effect only syncs the DOM class — no setState here
-  if (isDarkMode) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-}, [isDarkMode]);
-
-  const toggleTheme = () => {
-    if (isDarkMode) {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setIsDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
+    const storedTheme = localStorage.getItem("theme");
+    // ✅ Fix 1: Default to dark instead of forcing light
+    if (storedTheme === null) {
       localStorage.setItem("theme", "dark");
-      setIsDarkMode(true);
+      return true;
     }
+    return storedTheme === "dark";
+  });
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
+
+  // ✅ Fix 2: Removed duplicate DOM manipulation — useEffect handles it
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev;
+      localStorage.setItem("theme", next ? "dark" : "light");
+      return next;
+    });
   };
 
   return (
@@ -38,7 +35,7 @@ useEffect(() => {
       onClick={toggleTheme}
       className={cn(
         "fixed max-sm:hidden top-5 right-5 z-50 p-2 rounded-full transition-colors duration-300",
-        "focus:outlin-hidden"
+        "focus:outline-hidden" // ✅ Fix 3: outlin-hidden → outline-hidden
       )}
     >
       {isDarkMode ? (
